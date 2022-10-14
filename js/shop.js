@@ -1,3 +1,4 @@
+
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
 var products = [
     {
@@ -81,14 +82,12 @@ function buy(id) {
             cartList.push(products[i])
         }
     }
-    console.log(cartList)
     calculateTotal()
 }
 
 // Exercise 2
 function cleanCart() {
     cartList.splice(0, products.length)
-    console.log(cartList)
 }
 
 // Exercise 3
@@ -98,21 +97,41 @@ function calculateTotal() {
     for (let i = 0; i < cartList.length; i++) {
         total += cartList[i].price
     }
-    generateCart()
-    console.log(total)
 }
 
 // Exercise 4
 function generateCart(cartList) {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-    
-    cart 
-    cartList.map((x) => {
-        s[x] = s[x] + 1 || 1;
-    });
-    console.log(s)
-    
+
+    for (let i = 0; i < cartList.length; i++) {
+        if (cart.length == 0) {
+            cartList[i].quantity = 1
+            cartList[i].subtotal = cartList[i].price
+            console.log(cartList)
+            cart.push(cartList[i])
+            console.log(cart)
+        } else {
+            //Si Cart no está vacío entra en el siguiente bucle:
+            for (let j = 0; j < cart.length; j++) {
+                // Recorrer Cart para buscar el id que coincida
+                if (cartList[i].id == cart[j].id) {
+                    // si coincide entra aquí:
+                    cart[j].quantity = cart[j].quantity + 1
+                    cart[j].subtotal = cart[j].price * cart[j].quantity
+                    console.log(cart)
+                } 
+                else {
+                    // si no coincide entra aquí:
+                    cartList[i].quantity = 1
+                    cartList[i].subtotal = cartList[i].price 
+                    cart.push(cartList[i])
+                    console.log(cart)
+                 }
+            }
+        }
+    }
+
 }
 
 // Exercise 5

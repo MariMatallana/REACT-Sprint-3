@@ -1,4 +1,3 @@
-
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
 var products = [
     {
@@ -69,17 +68,15 @@ let cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 let cart = [];
-
 let total = 0;
 
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
-
     for (let i = 0; i < products.length; i++) {
         if (products[i].id == id) {
-            cartList.push(products[i])
+            cartList.push({ ...products[i] })
         }
     }
     calculateTotal()
@@ -100,38 +97,29 @@ function calculateTotal() {
 }
 
 // Exercise 4
-function generateCart(cartList) {
+function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
-    for (let i = 0; i < cartList.length; i++) {
-        if (cart.length == 0) {
-            cartList[i].quantity = 1
-            cartList[i].subtotal = cartList[i].price
-            console.log(cartList)
+   cart = []
+   let indexValue 
+   let unit = 1
+   let i = 0
+
+    for (i ; i < cartList.length; i++) {
+        indexValue = cart.findIndex(item => item.id === cartList[i].id) 
+        if (indexValue == -1) {
+            cartList[i].quantity = unit
+            cartList[i].subtotal = cartList[i].price 
             cart.push(cartList[i])
             console.log(cart)
-        } else {
-            //Si Cart no está vacío entra en el siguiente bucle:
-            for (let j = 0; j < cart.length; j++) {
-                // Recorrer Cart para buscar el id que coincida
-                if (cartList[i].id == cart[j].id) {
-                    // si coincide entra aquí:
-                    cart[j].quantity = cart[j].quantity + 1
-                    cart[j].subtotal = cart[j].price * cart[j].quantity
-                    console.log(cart)
-                } 
-                else {
-                    // si no coincide entra aquí:
-                    cartList[i].quantity = 1
-                    cartList[i].subtotal = cartList[i].price 
-                    cart.push(cartList[i])
-                    console.log(cart)
-                 }
-            }
         }
-    }
-
+        else {
+            cart[indexValue].quantity = cart[indexValue].quantity + 1
+            cart[indexValue].subtotal = cart[indexValue].price * cart[indexValue].quantity
+            console.log(cart)
+        }
+    } 
 }
 
 // Exercise 5

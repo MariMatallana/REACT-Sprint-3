@@ -105,7 +105,7 @@ function generateCart() {
    let indexValue 
    let unit = 1 
    let i = 0
-
+ 
     for (i ; i < cartList.length; i++) {
         indexValue = cart.findIndex(item => item.id === cartList[i].id) 
         if (indexValue == -1) {

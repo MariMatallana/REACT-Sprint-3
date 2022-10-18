@@ -103,7 +103,7 @@ function generateCart() {
 
    cart = []
    let indexValue 
-   let unit = 1
+   let unit = 1 
    let i = 0
 
     for (i ; i < cartList.length; i++) {

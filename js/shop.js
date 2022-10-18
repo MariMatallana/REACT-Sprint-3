@@ -112,19 +112,32 @@ function generateCart() {
             cartList[i].quantity = unit
             cartList[i].subtotal = cartList[i].price 
             cart.push(cartList[i])
-            console.log(cart)
         }
         else {
             cart[indexValue].quantity = cart[indexValue].quantity + 1
             cart[indexValue].subtotal = cart[indexValue].price * cart[indexValue].quantity
-            console.log(cart)
         }
     } 
+    console.log(cart)
+    applyPromotionsCart()
 }
 
 // Exercise 5
 function applyPromotionsCart() {
-    // Apply promotions to each item in the array "cart"
+// Apply promotions to each item in the array "cart"
+    
+let subtotalWithDiscount = 0
+
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i] == "1") {
+            if (cart[i].quantity >= 3) {
+                subtotalWithDiscount = cart[i].subtotal - 10
+            }
+        }
+    }
+    console.log(subtotalWithDiscount)
+
+
 }
 
 // Exercise 6

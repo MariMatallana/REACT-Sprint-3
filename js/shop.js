@@ -127,22 +127,47 @@ function applyPromotionsCart() {
 // Apply promotions to each item in the array "cart"
     
 let subtotalWithDiscount = 0
+let firstSubtotal = 0
 
     for (let i = 0; i < cart.length; i++) {
-        if (cart[i] == "1") {
+        if (cart[i].id == "1") {
             if (cart[i].quantity >= 3) {
-                subtotalWithDiscount = cart[i].subtotal - 10
+                cart[i].subtotal = cart[i].quantity * 10 
+                firstSubtotal += cart[i].subtotal
+            }
+        }
+        if (cart[i].id == "3") {
+            if (cart[i].quantity >= 10) {
+                cart[i].subtotal = cart[i].subtotal / 3 * 2
+                firstSubtotal += cart[i].subtotal
             }
         }
     }
-    console.log(subtotalWithDiscount)
+
+    for (let i = 0; i < cart.length; i++) {
+        if (firstSubtotal > 0) {
+            subtotalWithDiscount += cart[i].subtotal
+        }
+    }
+
+    subtotalWithDiscount = Number(subtotalWithDiscount.toFixed(2))
+    
+    //console.log(subtotalWithDiscount)
 
 
 }
 
+
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+
+    let cartNumber = document.getElementById("count_product").innerHTML
+    cartNumber = 3
+
+    console.log(cartNumber)
+
+
 }
 
 

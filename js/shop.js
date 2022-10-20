@@ -79,7 +79,9 @@ function buy(id) {
             cartList.push({ ...products[i] })
         }
     }
-    calculateTotal()
+    generateCart()
+    count_product()
+
 }
 
 // Exercise 2
@@ -101,38 +103,40 @@ function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
-   cart = []
-   let indexValue 
-   let unit = 1 
-   let i = 0
- 
-    for (i ; i < cartList.length; i++) {
-        indexValue = cart.findIndex(item => item.id === cartList[i].id) 
+    cart = []
+    let indexValue
+    let unit = 1
+    let i = 0
+
+    for (i; i < cartList.length; i++) {
+        indexValue = cart.findIndex(item => item.id === cartList[i].id)
         if (indexValue == -1) {
             cartList[i].quantity = unit
-            cartList[i].subtotal = cartList[i].price 
+            cartList[i].subtotal = cartList[i].price
             cart.push(cartList[i])
         }
         else {
             cart[indexValue].quantity = cart[indexValue].quantity + 1
             cart[indexValue].subtotal = cart[indexValue].price * cart[indexValue].quantity
         }
-    } 
+    }
     console.log(cart)
     applyPromotionsCart()
+    calculateTotal()
+    printCart()
 }
 
 // Exercise 5
 function applyPromotionsCart() {
-// Apply promotions to each item in the array "cart"
-    
-let subtotalWithDiscount = 0
-let firstSubtotal = 0
+    // Apply promotions to each item in the array "cart"
+
+    let subtotalWithDiscount = 0
+    let firstSubtotal = 0
 
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id == "1") {
             if (cart[i].quantity >= 3) {
-                cart[i].subtotal = cart[i].quantity * 10 
+                cart[i].subtotal = cart[i].quantity * 10
                 firstSubtotal += cart[i].subtotal
             }
         }
@@ -151,22 +155,25 @@ let firstSubtotal = 0
     }
 
     subtotalWithDiscount = Number(subtotalWithDiscount.toFixed(2))
-    
+
     //console.log(subtotalWithDiscount)
 
 
 }
 
-
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
 
-    let cartNumber = document.getElementById("count_product").innerHTML
-    cartNumber = 3
+    let totalPrice = 0
+    let cartListHTML = [];
 
-    console.log(cartNumber)
-
+    for (let i = 0; i < cart.length; i++) {
+        totalPrice += cart[i].subtotal
+        cartListHTML.push(`<tr> <th scope="row"> ${cart[i].name} </th> <td> ${cart[i].price} </td><td>  ${cart[i].quantity} </td><td> ${cart[i].subtotal.toFixed(2)} </td></tr>`);
+    }
+    document.getElementById("cart_list").innerHTML = cartListHTML
+    document.getElementById('total_price').innerHTML = totalPrice.toFixed(2)
 
 }
 
@@ -189,4 +196,17 @@ function removeFromCart(id) {
 function open_modal() {
     console.log("Open Modal");
     printCart();
+}
+
+function count_product() {
+
+    let countProduct = 0
+
+
+    for (let i = 0; i < cart.length; i++) {
+        countProduct += cart[i].quantity
+    }
+    document.getElementById('count_product').innerHTML = countProduct
+
+
 }

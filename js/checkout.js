@@ -1,46 +1,107 @@
 
 // Exercise 6
 function validate() {
-	var error = 0;
 
-	let validName = 
-	let validEmail = 
-	let validAddress = 
-	let validLastN = 
-	let validPassword = 
-	let validPhone = 
+const formulario = document.getElementById('formulario');
+const inputs = document.querySelectorAll('#formulario input')
 
+const expressions = {
+	validName: /^[A-Za-z\s]*$/,
+	validEmail: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+	validAddress: /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/,
+	validLastN: /^[A-Za-z\s]*$/,
+	validPassword: /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{3,8}$/,
+	validPhone: /^\d{3,14}$/,
+}
 
-	// Get the input fields
-	var fName = document.getElementById("fName");
-	var fEmail = document.getElementById("fEmail");
-	var fAddress = document.getElementById("fAddress")
-	var fLastN = document.getElementById("fLastN")
-	var fPassword = document.getElementById("fPassword")
-	var fPhone = document.getElementById("fPhone")
+const validateForm = (e) => {
+	switch (e.target.name) {
+		case "fName":
+			if (expressions.validName.test(e.target.value) && e.target.value.length >= 3) {
+					document.getElementById("fName").classList.add("is-valid")
+					document.getElementById("fName").classList.remove("is-invalid")
+			}
+			 else {
+				document.getElementById("fName").classList.add("is-invalid")
+				document.getElementById("fName").classList.remove("is-valid")
+			}
+		break;
+	}
+	switch (e.target.name) {
+		case "fEmail":
+			if (expressions.validEmail.test(e.target.value) && e.target.value.length >= 3) {
+					document.getElementById("fEmail").classList.add("is-valid")
+					document.getElementById("fEmail").classList.remove("is-invalid")
+			}
+			 else {
+				document.getElementById("fEmail").classList.add("is-invalid")
+				document.getElementById("fEmail").classList.remove("is-valid")
+			}
+		break;
+	}
 
-	// Get the error elements
-	var errorName = document.getElementById("errorName");
-	var errorEmail = document.getElementById("errorEmail"); 
-	var errorAddress = document.getElementById("errorAddress");
-	var errorLastN = document.getElementById("errorLastN");
-	var errorPassword = document.getElementById("errorPassword");
-	var errorPhone = document.getElementById("errorPhone");
+	switch (e.target.name) {
+		case "fAddress":
+			if (expressions.validAddress.test(e.target.value) && e.target.value.length >= 3) {
+					document.getElementById("fAddress").classList.add("is-valid")
+					document.getElementById("fAddress").classList.remove("is-invalid")
+			}
+			 else {
+				document.getElementById("fEmail").classList.add("is-invalid")
+				document.getElementById("fEmail").classList.remove("is-valid")
+			}
+		break;
+	}
 
+	switch (e.target.name) {
+		case "fLastN":
+			if (expressions.validLastN.test(e.target.value) && e.target.value.length >= 3) {
+					document.getElementById("fLastN").classList.add("is-valid")
+					document.getElementById("fLastN").classList.remove("is-invalid")
+			}
+			 else {
+				document.getElementById("fLastN").classList.add("is-invalid")
+				document.getElementById("fLastN").classList.remove("is-valid")
+			}
+		break;
+	}
+
+	switch (e.target.name) {
+		case "fPassword":
+			if (expressions.validPassword.test(e.target.value) && e.target.value.length >= 3) {
+					document.getElementById("fPassword").classList.add("is-valid")
+					document.getElementById("fPassword").classList.remove("is-invalid")
+			}
+			 else {
+				document.getElementById("fPassword").classList.add("is-invalid")
+				document.getElementById("fPassword").classList.remove("is-valid")
+			}
+		break;
+	}
+
+	switch (e.target.name) {
+		case "fPhone":
+			if (expressions.validPhone.test(e.target.value) && e.target.value.length == 9) {
+					document.getElementById("fPhone").classList.add("is-valid")
+					document.getElementById("fPhone").classList.remove("is-invalid")
+			}
+			 else {
+				document.getElementById("fPhone").classList.add("is-invalid")
+				document.getElementById("fPhone").classList.remove("is-valid")
+			}
+		break;
+	}
 	
-	// Validate fields entered by the user: name, phone, password, and email
-	if(fName.value == null || fName.length < 3 ){
-		error++;
-	}
 
-	if(fEmail.value == null || ""){
-		error++;
-	}
-	 
-	if(error>0){
-		alert("Error. Los datos no son correctos");
-	}else{
-		alert("OK");
-	}
+}
+
+inputs.forEach((input) => {
+	input.addEventListener('keyup', validateForm);
+	input.addEventListener('blur', validateForm);
+})
+
+formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
+});
 
 }

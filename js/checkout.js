@@ -1,6 +1,6 @@
 
 // Exercise 6
-function validate() {
+
 
 const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input')
@@ -8,7 +8,7 @@ const inputs = document.querySelectorAll('#formulario input')
 const expressions = {
 	validName: /^[A-Za-z\s]*$/,
 	validEmail: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-	validAddress: /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/,
+	validAddress: /[A-Za-z0-9'\.\-\s\,]/,
 	validLastN: /^[A-Za-z\s]*$/,
 	validPassword: /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{3,8}$/,
 	validPhone: /^\d{3,14}$/,
@@ -47,8 +47,8 @@ const validateForm = (e) => {
 					document.getElementById("fAddress").classList.remove("is-invalid")
 			}
 			 else {
-				document.getElementById("fEmail").classList.add("is-invalid")
-				document.getElementById("fEmail").classList.remove("is-valid")
+				document.getElementById("fAddress").classList.add("is-invalid")
+				document.getElementById("fAddress").classList.remove("is-valid")
 			}
 		break;
 	}
@@ -104,4 +104,7 @@ formulario.addEventListener('submit', (e) => {
 	e.preventDefault();
 });
 
-}
+function validate() {
+    document.getElementById('formulario').reset();
+  }
+

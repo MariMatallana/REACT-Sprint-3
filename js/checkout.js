@@ -1,6 +1,6 @@
 
 // Exercise 6
-
+ 
 
 const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input')
@@ -94,7 +94,7 @@ const validateForm = (e) => {
 	
 
 }
-
+ 
 inputs.forEach((input) => {
 	input.addEventListener('keyup', validateForm);
 	input.addEventListener('blur', validateForm);
